@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'plugin-vote'
+
+include 'api'
+include 'app'
+include 'ui'
+include 'packages:vote'
+
+project(':packages:vote').projectDir = file('packages/vote')
+

@@ -1,0 +1,1451 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Halo",
+    "version" : "2.20.11"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:62947",
+    "description" : "Generated server url"
+  } ],
+  "security" : [ {
+    "basicAuth" : [ ],
+    "bearerAuth" : [ ]
+  } ],
+  "paths" : {
+    "/apis/api.vote.kunkunyu.com/v1alpha1/votes/{name}/detail" : {
+      "get" : {
+        "description" : "投票详情",
+        "operationId" : "GetVoteDetail",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteDetail"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/api.vote.kunkunyu.com/v1alpha1/votes/{name}/submit" : {
+      "post" : {
+        "description" : "用户提交投票",
+        "operationId" : "SubmitVoteData",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/VoteData"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteData"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/api.vote.kunkunyu.com/v1alpha1/votes/{name}/user-list" : {
+      "get" : {
+        "description" : "投票用户列表",
+        "operationId" : "GetVoteUserList",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/VoteUser"
+                  }
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/console.api.vote.kunkunyu.com/v1alpha1/votes" : {
+      "get" : {
+        "description" : "分页查询投票列表",
+        "operationId" : "ListVotes",
+        "parameters" : [ {
+          "description" : "Page number. Default is 0.",
+          "in" : "query",
+          "name" : "page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Size number. Default is 0.",
+          "in" : "query",
+          "name" : "size",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Label selector. e.g.: hidden!=true",
+          "in" : "query",
+          "name" : "labelSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Field selector. e.g.: metadata.name==halo",
+          "in" : "query",
+          "name" : "fieldSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "in" : "query",
+          "name" : "sort",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Vote filtered by keyword.",
+          "in" : "query",
+          "name" : "keyword",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "Vote type.",
+          "in" : "query",
+          "name" : "type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "Vote hasEnded.",
+          "in" : "query",
+          "name" : "hasEnded",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteList"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "console.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      },
+      "post" : {
+        "description" : "添加投票",
+        "operationId" : "CreateVote",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "console.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/console.api.vote.kunkunyu.com/v1alpha1/votes/{name}" : {
+      "put" : {
+        "description" : "编辑投票",
+        "operationId" : "UpdateVote",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "console.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/console.api.vote.kunkunyu.com/v1alpha1/votes/{name}/user-list" : {
+      "get" : {
+        "description" : "投票用户列表",
+        "operationId" : "VoteUserList",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/VoteUser"
+                  }
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "console.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/uc.api.vote.kunkunyu.com/v1alpha1/votes" : {
+      "get" : {
+        "description" : "分页查询投票列表",
+        "operationId" : "ListMyVotes",
+        "parameters" : [ {
+          "description" : "Page number. Default is 0.",
+          "in" : "query",
+          "name" : "page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Size number. Default is 0.",
+          "in" : "query",
+          "name" : "size",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Label selector. e.g.: hidden!=true",
+          "in" : "query",
+          "name" : "labelSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Field selector. e.g.: metadata.name==halo",
+          "in" : "query",
+          "name" : "fieldSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "in" : "query",
+          "name" : "sort",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Vote filtered by keyword.",
+          "in" : "query",
+          "name" : "keyword",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "Vote type.",
+          "in" : "query",
+          "name" : "type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "description" : "Vote hasEnded.",
+          "in" : "query",
+          "name" : "hasEnded",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteList"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      },
+      "post" : {
+        "description" : "创建当前用户的投票",
+        "operationId" : "CreateMyVote",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/uc.api.vote.kunkunyu.com/v1alpha1/votes/{name}" : {
+      "delete" : {
+        "description" : "删除当前用户的投票",
+        "operationId" : "DeleteMyVote",
+        "parameters" : [ {
+          "description" : "Vote name",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      },
+      "get" : {
+        "description" : "获取当前用户的投票",
+        "operationId" : "GetMyVote",
+        "parameters" : [ {
+          "description" : "Vote name",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      },
+      "put" : {
+        "description" : "更新当前用户的投票.",
+        "operationId" : "UpdateMyVote",
+        "parameters" : [ {
+          "description" : "Vote name",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/uc.api.vote.kunkunyu.com/v1alpha1/votes/{name}/user-list" : {
+      "get" : {
+        "description" : "投票用户列表",
+        "operationId" : "GetMyVoteUserList",
+        "parameters" : [ {
+          "description" : "Vote name",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/VoteUser"
+                  }
+                }
+              }
+            },
+            "description" : "default response"
+          }
+        },
+        "tags" : [ "uc.api.vote.kunkunyu.com/v1alpha1/Vote" ]
+      }
+    },
+    "/apis/vote.kunkunyu.com/v1alpha1/votedatas" : {
+      "get" : {
+        "description" : "List VoteData",
+        "operationId" : "listVoteData",
+        "parameters" : [ {
+          "description" : "Page number. Default is 0.",
+          "in" : "query",
+          "name" : "page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Size number. Default is 0.",
+          "in" : "query",
+          "name" : "size",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Label selector. e.g.: hidden!=true",
+          "in" : "query",
+          "name" : "labelSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Field selector. e.g.: metadata.name==halo",
+          "in" : "query",
+          "name" : "fieldSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "in" : "query",
+          "name" : "sort",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteDataList"
+                }
+              }
+            },
+            "description" : "Response votedatas"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      },
+      "post" : {
+        "description" : "Create VoteData",
+        "operationId" : "createVoteData",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/VoteData"
+              }
+            }
+          },
+          "description" : "Fresh votedata"
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteData"
+                }
+              }
+            },
+            "description" : "Response votedatas created just now"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      }
+    },
+    "/apis/vote.kunkunyu.com/v1alpha1/votedatas/{name}" : {
+      "delete" : {
+        "description" : "Delete VoteData",
+        "operationId" : "deleteVoteData",
+        "parameters" : [ {
+          "description" : "Name of votedata",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Response votedata deleted just now"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      },
+      "get" : {
+        "description" : "Get VoteData",
+        "operationId" : "getVoteData",
+        "parameters" : [ {
+          "description" : "Name of votedata",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteData"
+                }
+              }
+            },
+            "description" : "Response single votedata"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      },
+      "patch" : {
+        "description" : "Patch VoteData",
+        "operationId" : "patchVoteData",
+        "parameters" : [ {
+          "description" : "Name of votedata",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json-patch+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JsonPatch"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteData"
+                }
+              }
+            },
+            "description" : "Response votedata patched just now"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      },
+      "put" : {
+        "description" : "Update VoteData",
+        "operationId" : "updateVoteData",
+        "parameters" : [ {
+          "description" : "Name of votedata",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/VoteData"
+              }
+            }
+          },
+          "description" : "Updated votedata"
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteData"
+                }
+              }
+            },
+            "description" : "Response votedatas updated just now"
+          }
+        },
+        "tags" : [ "VoteDataV1alpha1" ]
+      }
+    },
+    "/apis/vote.kunkunyu.com/v1alpha1/votes" : {
+      "get" : {
+        "description" : "List Vote",
+        "operationId" : "listVote",
+        "parameters" : [ {
+          "description" : "Page number. Default is 0.",
+          "in" : "query",
+          "name" : "page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Size number. Default is 0.",
+          "in" : "query",
+          "name" : "size",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "description" : "Label selector. e.g.: hidden!=true",
+          "in" : "query",
+          "name" : "labelSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Field selector. e.g.: metadata.name==halo",
+          "in" : "query",
+          "name" : "fieldSelector",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }, {
+          "description" : "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+          "in" : "query",
+          "name" : "sort",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/VoteList"
+                }
+              }
+            },
+            "description" : "Response votes"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      },
+      "post" : {
+        "description" : "Create Vote",
+        "operationId" : "createVote",
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          },
+          "description" : "Fresh vote"
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "Response votes created just now"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      }
+    },
+    "/apis/vote.kunkunyu.com/v1alpha1/votes/{name}" : {
+      "delete" : {
+        "description" : "Delete Vote",
+        "operationId" : "deleteVote",
+        "parameters" : [ {
+          "description" : "Name of vote",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Response vote deleted just now"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      },
+      "get" : {
+        "description" : "Get Vote",
+        "operationId" : "getVote",
+        "parameters" : [ {
+          "description" : "Name of vote",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "Response single vote"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      },
+      "patch" : {
+        "description" : "Patch Vote",
+        "operationId" : "patchVote",
+        "parameters" : [ {
+          "description" : "Name of vote",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json-patch+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/JsonPatch"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "Response vote patched just now"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      },
+      "put" : {
+        "description" : "Update Vote",
+        "operationId" : "updateVote",
+        "parameters" : [ {
+          "description" : "Name of vote",
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Vote"
+              }
+            }
+          },
+          "description" : "Updated vote"
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Vote"
+                }
+              }
+            },
+            "description" : "Response votes updated just now"
+          }
+        },
+        "tags" : [ "VoteV1alpha1" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "AddOperation" : {
+        "required" : [ "op", "path", "value" ],
+        "type" : "object",
+        "properties" : {
+          "op" : {
+            "type" : "string",
+            "enum" : [ "add" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          },
+          "value" : {
+            "description" : "Value can be any JSON value"
+          }
+        }
+      },
+      "Contributor" : {
+        "type" : "object",
+        "properties" : {
+          "avatar" : {
+            "type" : "string"
+          },
+          "displayName" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CopyOperation" : {
+        "required" : [ "op", "from", "path" ],
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          },
+          "op" : {
+            "type" : "string",
+            "enum" : [ "copy" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          }
+        }
+      },
+      "JsonPatch" : {
+        "minItems" : 1,
+        "uniqueItems" : true,
+        "type" : "array",
+        "description" : "JSON schema for JSONPatch operations",
+        "items" : {
+          "oneOf" : [ {
+            "$ref" : "#/components/schemas/AddOperation"
+          }, {
+            "$ref" : "#/components/schemas/ReplaceOperation"
+          }, {
+            "$ref" : "#/components/schemas/TestOperation"
+          }, {
+            "$ref" : "#/components/schemas/RemoveOperation"
+          }, {
+            "$ref" : "#/components/schemas/MoveOperation"
+          }, {
+            "$ref" : "#/components/schemas/CopyOperation"
+          } ]
+        }
+      },
+      "Metadata" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "annotations" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "creationTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "nullable" : true
+          },
+          "deletionTimestamp" : {
+            "type" : "string",
+            "format" : "date-time",
+            "nullable" : true
+          },
+          "finalizers" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "nullable" : true,
+            "items" : {
+              "type" : "string",
+              "nullable" : true
+            }
+          },
+          "generateName" : {
+            "type" : "string",
+            "description" : "The name field will be generated automatically according to the given generateName field"
+          },
+          "labels" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Metadata name"
+          },
+          "version" : {
+            "type" : "integer",
+            "format" : "int64",
+            "nullable" : true
+          }
+        }
+      },
+      "MoveOperation" : {
+        "required" : [ "op", "from", "path" ],
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          },
+          "op" : {
+            "type" : "string",
+            "enum" : [ "move" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          }
+        }
+      },
+      "RemoveOperation" : {
+        "required" : [ "op", "path" ],
+        "type" : "object",
+        "properties" : {
+          "op" : {
+            "type" : "string",
+            "enum" : [ "remove" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          }
+        }
+      },
+      "ReplaceOperation" : {
+        "required" : [ "op", "path", "value" ],
+        "type" : "object",
+        "properties" : {
+          "op" : {
+            "type" : "string",
+            "enum" : [ "replace" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          },
+          "value" : {
+            "description" : "Value can be any JSON value"
+          }
+        }
+      },
+      "TestOperation" : {
+        "required" : [ "op", "path", "value" ],
+        "type" : "object",
+        "properties" : {
+          "op" : {
+            "type" : "string",
+            "enum" : [ "test" ]
+          },
+          "path" : {
+            "pattern" : "^(/[^/~]*(~[01][^/~]*)*)*$",
+            "type" : "string",
+            "description" : "A JSON Pointer path pointing to the location to move/copy from.",
+            "example" : "/a/b/c"
+          },
+          "value" : {
+            "description" : "Value can be any JSON value"
+          }
+        }
+      },
+      "Vote" : {
+        "required" : [ "apiVersion", "kind", "metadata", "spec" ],
+        "type" : "object",
+        "properties" : {
+          "apiVersion" : {
+            "type" : "string"
+          },
+          "kind" : {
+            "type" : "string"
+          },
+          "metadata" : {
+            "$ref" : "#/components/schemas/Metadata"
+          },
+          "spec" : {
+            "$ref" : "#/components/schemas/VoteSpec"
+          },
+          "stats" : {
+            "$ref" : "#/components/schemas/VoteStats"
+          }
+        }
+      },
+      "VoteData" : {
+        "required" : [ "apiVersion", "kind", "metadata", "owner", "voteData", "voteName" ],
+        "type" : "object",
+        "properties" : {
+          "apiVersion" : {
+            "type" : "string"
+          },
+          "kind" : {
+            "type" : "string"
+          },
+          "metadata" : {
+            "$ref" : "#/components/schemas/Metadata"
+          },
+          "owner" : {
+            "type" : "string"
+          },
+          "voteData" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "voteName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "VoteDataList" : {
+        "required" : [ "first", "hasNext", "hasPrevious", "items", "last", "page", "size", "total", "totalPages" ],
+        "type" : "object",
+        "properties" : {
+          "first" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page is the first page."
+          },
+          "hasNext" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page has previous page."
+          },
+          "hasPrevious" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page has previous page."
+          },
+          "items" : {
+            "type" : "array",
+            "description" : "A chunk of items.",
+            "items" : {
+              "$ref" : "#/components/schemas/VoteData"
+            }
+          },
+          "last" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page is the last page."
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Page number, starts from 1. If not set or equal to 0, it means no pagination.",
+            "format" : "int32"
+          },
+          "size" : {
+            "type" : "integer",
+            "description" : "Size of each page. If not set or equal to 0, it means no pagination.",
+            "format" : "int32"
+          },
+          "total" : {
+            "type" : "integer",
+            "description" : "Total elements.",
+            "format" : "int64"
+          },
+          "totalPages" : {
+            "type" : "integer",
+            "description" : "Indicates total pages.",
+            "format" : "int64"
+          }
+        }
+      },
+      "VoteDetail" : {
+        "required" : [ "vote", "voteCount", "voteUser" ],
+        "type" : "object",
+        "properties" : {
+          "userVoteData" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "vote" : {
+            "$ref" : "#/components/schemas/Vote"
+          },
+          "voteCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "voteDataList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/VotingData"
+            }
+          },
+          "voteUser" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "VoteList" : {
+        "required" : [ "first", "hasNext", "hasPrevious", "items", "last", "page", "size", "total", "totalPages" ],
+        "type" : "object",
+        "properties" : {
+          "first" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page is the first page."
+          },
+          "hasNext" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page has previous page."
+          },
+          "hasPrevious" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page has previous page."
+          },
+          "items" : {
+            "type" : "array",
+            "description" : "A chunk of items.",
+            "items" : {
+              "$ref" : "#/components/schemas/Vote"
+            }
+          },
+          "last" : {
+            "type" : "boolean",
+            "description" : "Indicates whether current page is the last page."
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Page number, starts from 1. If not set or equal to 0, it means no pagination.",
+            "format" : "int32"
+          },
+          "size" : {
+            "type" : "integer",
+            "description" : "Size of each page. If not set or equal to 0, it means no pagination.",
+            "format" : "int32"
+          },
+          "total" : {
+            "type" : "integer",
+            "description" : "Total elements.",
+            "format" : "int64"
+          },
+          "totalPages" : {
+            "type" : "integer",
+            "description" : "Indicates total pages.",
+            "format" : "int64"
+          }
+        }
+      },
+      "VoteOption" : {
+        "required" : [ "title" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "选项唯一值"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "选项标题"
+          }
+        },
+        "description" : "选项"
+      },
+      "VoteSpec" : {
+        "required" : [ "canAnonymously", "canSeeVoters", "hasEnded", "options", "timeLimit", "title", "type" ],
+        "type" : "object",
+        "properties" : {
+          "canAnonymously" : {
+            "type" : "boolean",
+            "description" : "可以匿名投票",
+            "default" : false
+          },
+          "canSeeVoters" : {
+            "type" : "boolean",
+            "description" : "可以看到选择用户"
+          },
+          "endDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "hasEnded" : {
+            "type" : "boolean",
+            "description" : "投票结束",
+            "default" : false
+          },
+          "maxVotes" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "options" : {
+            "type" : "array",
+            "description" : "选项",
+            "items" : {
+              "$ref" : "#/components/schemas/VoteOption"
+            }
+          },
+          "owner" : {
+            "type" : "string"
+          },
+          "remark" : {
+            "type" : "string"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "timeLimit" : {
+            "type" : "string",
+            "enum" : [ "custom", "permanent", "thirty", "seven", "one" ]
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "single", "multiple", "pk" ]
+          }
+        }
+      },
+      "VoteStats" : {
+        "type" : "object",
+        "properties" : {
+          "voteCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "voteUser" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "VoteUser" : {
+        "required" : [ "id", "userList" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "userList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Contributor"
+            }
+          }
+        }
+      },
+      "VotingData" : {
+        "required" : [ "id", "voteCount" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "voteCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "basicAuth" : {
+        "scheme" : "basic",
+        "type" : "http"
+      },
+      "bearerAuth" : {
+        "bearerFormat" : "JWT",
+        "scheme" : "bearer",
+        "type" : "http"
+      }
+    }
+  }
+}

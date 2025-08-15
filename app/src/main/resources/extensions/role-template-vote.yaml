@@ -1,0 +1,41 @@
+apiVersion: v1alpha1
+kind: "Role"
+metadata:
+  name: role-template-manage-vote
+  labels:
+    halo.run/role-template: "true"
+  annotations:
+    rbac.authorization.halo.run/dependencies: |
+      [ "role-template-view-vote" ]
+    rbac.authorization.halo.run/module: "投票"
+    rbac.authorization.halo.run/display-name: "投票管理"
+    rbac.authorization.halo.run/ui-permissions: |
+      ["plugin:vote:manage"]
+rules:
+  - apiGroups: [ "vote.kunkunyu.com" ]
+    resources: [ "votes" ]
+    verbs: [ "create", "patch", "update", "delete", "deletecollection" ]
+  - apiGroups: [ "console.api.vote.kunkunyu.com" ]
+    resources: [ "votes" ]
+    verbs: [ "create", "update"]
+
+---
+
+apiVersion: v1alpha1
+kind: "Role"
+metadata:
+  name: role-template-view-vote
+  labels:
+    halo.run/role-template: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "投票"
+    rbac.authorization.halo.run/display-name: "投票查看"
+    rbac.authorization.halo.run/ui-permissions: |
+      ["plugin:vote:view"]
+rules:
+  - apiGroups: [ "vote.kunkunyu.com" ]
+    resources: [ "votes" ]
+    verbs: [ "get", "list" ]
+  - apiGroups: [ "console.api.vote.kunkunyu.com" ]
+    resources: [ "votes","votes/user-list" ]
+    verbs: [ "get", "list" ]

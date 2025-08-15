@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    group = 'com.kunkunyu.vote'  // 设置默认的 groupId
+    version = project.findProperty('version') ?: '1.0.0'  // 优先使用命令行参数，否则使用默认值
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/releases' }
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+}

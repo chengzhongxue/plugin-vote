@@ -1,0 +1,15 @@
+apiVersion: v1alpha1
+kind: Role
+metadata:
+  name:  role-template-anonymous-vote
+  labels:
+    halo.run/hidden: "true"
+    halo.run/role-template: "true"
+    rbac.authorization.halo.run/aggregate-to-anonymous: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "投票"
+    rbac.authorization.halo.run/display-name: "匿名访问"
+rules:
+  - apiGroups: [ "api.vote.kunkunyu.com" ]
+    resources: [ "*" ]
+    verbs: [ "*" ]

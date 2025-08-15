@@ -1,0 +1,20 @@
+apiVersion: plugin.halo.run/v1alpha1
+kind: Plugin
+metadata:
+  name: vote
+spec:
+  enabled: false
+  requires: ">=2.21.0"
+  version: "1.1.0"
+  author:
+    name: 困困鱼
+    website: https://github.com/chengzhongxue
+  logo: logo.png
+  homepage: https://github.com/chengzhongxue/link-submit
+  repo: https://github.com/chengzhongxue/link-submit
+  issues: https://github.com/chengzhongxue/link-submit/issues
+  displayName: "投票管理"
+  description: ""
+  license:
+    - name: "GPL-3.0"
+      url: "https://github.com/chengzhongxue/plugin-vote/blob/main/LICENSE"

@@ -1,0 +1,80 @@
+@media (prefers-color-scheme: dark) {
+    .color-scheme-auto,
+    [data-color-scheme='auto'] friends-rss {
+        color-scheme: dark;
+        /* Text */
+        --vote-text-title-color: #f3f4f6;
+        --vote-text-description-color: #9ca3af;
+        --vote-text-selected-color: #d1fae5;
+        --vote-text-voted-color: #bfdbfe;
+        --vote-text-error-color: #fca5a5;
+        --vote-text-button-color: #dbeafe;
+        --vote-icon-color: #9ca3af;
+
+        /* Background */
+        --vote-background-primary-color: #1f2937;
+        --vote-background-secondary-color: #374151;
+        --vote-background-tertiary-color: #4b5563;
+        --vote-background-selected-color: #065f46;
+        --vote-background-voted-color: #1e40af;
+        --vote-background-progress-color: rgba(75, 85, 99, 0.6);
+        --vote-background-progress-voted-color: rgba(59, 130, 246, 0.4);
+        --vote-background-button-color: #2563eb;
+        --vote-background-button-hover-color: #1d4ed8;
+        --vote-background-tag-color: #374151;
+        --vote-background-voted-tag-color: #1e3a8a;
+
+        /* Border */
+        --vote-border-color: #4b5563;
+        --vote-border-selected-color: #10b981;
+        --vote-border-voted-color: #2563eb;
+
+        /* Shadow */
+        --vote-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+
+        /* PK Progress Bar */
+        --vote-pk-option1-bg: #3b82f6;
+        --vote-pk-option2-bg: #f97316;
+        --vote-pk-progress-text-color: #ffffff;
+    }
+}
+
+.color-scheme-dark,
+.dark,
+[data-color-scheme='dark'] friends-rss {
+    color-scheme: dark;
+    /* Text */
+    --vote-text-title-color: #f3f4f6;
+    --vote-text-description-color: #9ca3af;
+    --vote-text-selected-color: #d1fae5;
+    --vote-text-voted-color: #bfdbfe;
+    --vote-text-error-color: #fca5a5;
+    --vote-text-button-color: #dbeafe;
+    --vote-icon-color: #9ca3af;
+
+    /* Background */
+    --vote-background-primary-color: #1f2937;
+    --vote-background-secondary-color: #374151;
+    --vote-background-tertiary-color: #4b5563;
+    --vote-background-selected-color: #065f46;
+    --vote-background-voted-color: #1e40af;
+    --vote-background-progress-color: rgba(75, 85, 99, 0.6);
+    --vote-background-progress-voted-color: rgba(59, 130, 246, 0.4);
+    --vote-background-button-color: #2563eb;
+    --vote-background-button-hover-color: #1d4ed8;
+    --vote-background-tag-color: #374151;
+    --vote-background-voted-tag-color: #1e3a8a;
+
+    /* Border */
+    --vote-border-color: #4b5563;
+    --vote-border-selected-color: #10b981;
+    --vote-border-voted-color: #2563eb;
+
+    /* Shadow */
+    --vote-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+
+    /* PK Progress Bar */
+    --vote-pk-option1-bg: #3b82f6;
+    --vote-pk-option2-bg: #f97316;
+    --vote-pk-progress-text-color: #ffffff;
+}

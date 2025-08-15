@@ -1,0 +1,15 @@
+apiVersion: v1alpha1
+kind: Role
+metadata:
+  name:  role-template-uc-vote
+  labels:
+    halo.run/role-template: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "投票"
+    rbac.authorization.halo.run/display-name: "我的投票"
+    rbac.authorization.halo.run/ui-permissions: |
+      [ "uc:plugin:vote:manage" ]
+rules:
+  - apiGroups: [ "uc.api.vote.kunkunyu.com" ]
+    resources: [ "*"]
+    verbs: [ "*" ]
