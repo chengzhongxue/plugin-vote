@@ -1,6 +1,7 @@
 package com.kunkunyu.vote.endpoint;
 
 import com.kunkunyu.vote.VoteDetail;
+import com.kunkunyu.vote.VoteUtils;
 import com.kunkunyu.vote.content.VoteUser;
 import com.kunkunyu.vote.Vote;
 import com.kunkunyu.vote.VoteData;
@@ -10,13 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.fn.builders.schema.Builder;
 import org.springdoc.webflux.core.fn.SpringdocRouteBuilder;
-import org.springframework.http.HttpCookie;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -26,9 +24,6 @@ import run.halo.app.core.extension.endpoint.CustomEndpoint;
 import run.halo.app.extension.GroupVersion;
 import java.security.Principal;
 import java.util.List;
-import java.util.UUID;
-
-import static com.kunkunyu.vote.Vote.Cookie;
 import static com.kunkunyu.vote.Vote.VoteType.multiple;
 import static com.kunkunyu.vote.Vote.VoteType.pk;
 import static com.kunkunyu.vote.Vote.VoteType.single;
@@ -98,7 +93,7 @@ public class AnonymousVoteEndpoint implements CustomEndpoint {
             .flatMap(username -> {
                 String owner = username;
                 if (owner.equals("anonymousUser")) {
-                    owner = getSessionKey(request);
+                    owner = VoteUtils.getSessionKey(request);
                 }
                 return voteService.getVoteDetail(name,owner);
             })
@@ -157,7 +152,7 @@ public class AnonymousVoteEndpoint implements CustomEndpoint {
                     }
 
                     if (owner.equals("anonymousUser")) {
-                        owner = getSessionKey(request);
+                        owner = VoteUtils.getSessionKey(request);
                     }
                     voteData.setVoteName(name);
                     voteData.setOwner(owner);
@@ -178,19 +173,6 @@ public class AnonymousVoteEndpoint implements CustomEndpoint {
                 return voteService.getVoteUserList(name).collectList();
             })
             .flatMap(voteUserList -> ServerResponse.ok().bodyValue(voteUserList));
-    }
-
-    private String getSessionKey(ServerRequest request) {
-        String sessionKey = "";
-        MultiValueMap<String, HttpCookie> cookies = request.exchange().getRequest().getCookies();
-        if (cookies.containsKey(Cookie)) {
-            sessionKey = (cookies.getFirst(Cookie)).getValue();
-        } else {
-            sessionKey = UUID.randomUUID().toString();
-            ResponseCookie.ResponseCookieBuilder builder = ResponseCookie.from(Cookie, sessionKey).path("/").httpOnly(true);
-            request.exchange().getResponse().addCookie(builder.build());
-        }
-        return sessionKey;
     }
 
     protected Mono<String> getCurrentUser() {
