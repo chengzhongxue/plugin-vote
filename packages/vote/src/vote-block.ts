@@ -285,8 +285,8 @@ export class VoteBlock extends LitElement {
     if (spec.type === 'pk' && spec.options.length === 2) {
       const option1 = spec.options[0];
       const option2 = spec.options[1];
-      const voteData1 = voteDataList.find((data) => data.id === option1.id);
-      const voteData2 = voteDataList.find((data) => data.id === option2.id);
+      const voteData1 = voteDataList?.find((data) => data.id === option1.id);
+      const voteData2 = voteDataList?.find((data) => data.id === option2.id);
       const voteCount1 = voteData1 ? voteData1.voteCount : 0;
       const voteCount2 = voteData2 ? voteData2.voteCount : 0;
       const totalVotes = voteCount1 + voteCount2; // Use sum of the two options for PK percentage
@@ -411,8 +411,11 @@ export class VoteBlock extends LitElement {
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
             ${spec.options.map((option) => {
-              const voteData = voteDataList.find((data) => data.id === option.id);
-              const voteCount = voteData ? voteData.voteCount : 0;
+              let voteCount = 0;
+              if (voteDataList) {
+                 const voteData = voteDataList?.find((data) => data.id === option.id);
+                 voteCount = voteData ? voteData.voteCount : 0;
+              }
               const percentage = this.calculatePercentage(voteCount);
               const isSelected = this.isOptionSelected(option.id);
               const isUserVoted = this.hasVoted() && this.voteDetail!.userVoteData.includes(option.id);

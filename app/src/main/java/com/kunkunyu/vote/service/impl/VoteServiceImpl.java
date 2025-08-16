@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.kunkunyu.vote.Vote.VoteType.multiple;
 import static org.springframework.data.domain.Sort.Order.asc;
@@ -86,9 +87,69 @@ public class VoteServiceImpl implements VoteService {
                     Metadata metadata = new Metadata();
                     metadata.setGenerateName(voteData.getVoteName()+"-data-");
                     voteData.setMetadata(metadata);
-                    return client.create(voteData);
+                    return client.create(voteData)
+                        .flatMap(createVoteData -> updateVoteStats(createVoteData).thenReturn(createVoteData));
             })).retryWhen(Retry.backoff(5, Duration.ofMillis(100))
                 .filter(OptimisticLockingFailureException.class::isInstance));
+    }
+
+    Mono<Void> updateVoteStats(VoteData voteData) {
+        String voteName = voteData.getVoteName();
+        return client.fetch(Vote.class, voteName)
+            .flatMap(vote -> {
+                var voteStats = vote.getStats();
+                if (voteStats == null) {
+                    voteStats = new Vote.VoteStats();
+                    voteStats.setVoteCount(0);
+                    voteStats.setVoteUser(0);
+                    voteStats.setVoteDataList(new ArrayList<>());
+                    vote.setStats(voteStats);
+                }
+
+                // 更新投票总数和用户数
+                voteStats.setVoteCount(voteStats.getVoteCount() + voteData.getVoteData().size());
+                voteStats.setVoteUser(voteStats.getVoteUser() + 1);
+
+                // 更新voteDataList - 统计每个选项的投票数
+                updateVoteDataList(vote, voteData);
+
+                return client.update(vote);
+            }).then();
+    }
+
+    private void updateVoteDataList(Vote vote, VoteData voteData) {
+        var voteStats = vote.getStats();
+        var voteDataList = voteStats.getVoteDataList();
+
+        // 处理 voteDataList 为空的情况
+        if (voteDataList == null) {
+            voteDataList = new ArrayList<>();
+        }
+
+        // 创建选项ID到投票数的映射
+        Map<String, Integer> voteCountMap = voteDataList.stream()
+            .collect(Collectors.toMap(
+                Vote.VotingData::getId,
+                Vote.VotingData::getVoteCount,
+                (existing, replacement) -> existing
+            ));
+
+        // 统计当前投票数据中每个选项的投票数
+        for (String optionId : voteData.getVoteData()) {
+            voteCountMap.put(optionId, voteCountMap.getOrDefault(optionId, 0) + 1);
+        }
+
+        // 重新构建voteDataList
+        var updatedVoteDataList = voteCountMap.entrySet().stream()
+            .map(entry -> {
+                var votingData = new Vote.VotingData();
+                votingData.setId(entry.getKey());
+                votingData.setVoteCount(entry.getValue());
+                return votingData;
+            })
+            .collect(Collectors.toList());
+
+        voteStats.setVoteDataList(updatedVoteDataList);
     }
 
     @Override
