@@ -10,9 +10,9 @@ spec:
     name: 困困鱼
     website: https://github.com/chengzhongxue
   logo: logo.png
-  homepage: https://github.com/chengzhongxue/link-submit
-  repo: https://github.com/chengzhongxue/link-submit
-  issues: https://github.com/chengzhongxue/link-submit/issues
+  homepage: https://github.com/chengzhongxue/plugin-vote
+  repo: https://github.com/chengzhongxue/plugin-vote
+  issues: https://github.com/chengzhongxue/plugin-vote/issues
   displayName: "投票管理"
   description: ""
   license:
