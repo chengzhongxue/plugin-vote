@@ -53,7 +53,7 @@ public class VoteQuery extends SortableRequest {
                 contains("spec.title", keyword),
                 contains("spec.remark", keyword),
                 contains("spec.owner", keyword),
-                contains("metadata.name", keyword)
+                equal("metadata.name", keyword)
             )));
 
         Optional.ofNullable(getType())

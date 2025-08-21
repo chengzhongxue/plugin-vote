@@ -5,6 +5,7 @@ import com.kunkunyu.vote.VoteUtils;
 import com.kunkunyu.vote.content.VoteUser;
 import com.kunkunyu.vote.Vote;
 import com.kunkunyu.vote.VoteData;
+import com.kunkunyu.vote.query.VoteQuery;
 import com.kunkunyu.vote.service.VoteService;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.server.ServerWebInputException;
 import reactor.core.publisher.Mono;
 import run.halo.app.core.extension.endpoint.CustomEndpoint;
 import run.halo.app.extension.GroupVersion;
+import run.halo.app.extension.ListResult;
 import java.security.Principal;
 import java.util.List;
 import static com.kunkunyu.vote.Vote.VoteType.multiple;
@@ -47,6 +49,17 @@ public class AnonymousVoteEndpoint implements CustomEndpoint {
             .required(true)
             .implementation(String.class);
         return SpringdocRouteBuilder.route()
+            .GET("votes", this::queryVotes, builder -> {
+                    builder.operationId("QueryVotes")
+                        .tag(tag)
+                        .description("分页查询投票列表")
+                        .response(
+                            responseBuilder()
+                                .implementation(ListResult.generateGenericClass(Vote.class))
+                        );
+                    VoteQuery.buildParameters(builder);
+                }
+            )
             .GET("votes/{name}/detail", this::getVoteDetail, builder -> {
                     builder.operationId("GetVoteDetail")
                         .tag(tag)
@@ -85,6 +98,12 @@ public class AnonymousVoteEndpoint implements CustomEndpoint {
                 }
             )
             .build();
+    }
+
+    Mono<ServerResponse> queryVotes(ServerRequest serverRequest) {
+        VoteQuery voteQuery = new VoteQuery(serverRequest);
+        return voteService.listVote(voteQuery)
+            .flatMap(votes -> ServerResponse.ok().bodyValue(votes));
     }
 
     Mono<ServerResponse> getVoteDetail(ServerRequest request) {
