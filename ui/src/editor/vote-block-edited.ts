@@ -145,6 +145,9 @@ const VoteBlockExtension = Node.create({
           shouldShow: ({ state }: { state: EditorState }) => {
             return isActive(state, VoteBlockExtension.name);
           },
+          options: {
+            placement: "top-start",
+          },
           items: [
             {
               priority: 50,

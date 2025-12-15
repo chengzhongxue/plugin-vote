@@ -1,11 +1,11 @@
-import { definePlugin } from "@halo-dev/console-shared";
+import { definePlugin } from "@halo-dev/ui-shared";
 import { markRaw } from "vue";
-import Votes from "@/views/Votes.vue";
 import FluentVote20Regular from '~icons/fluent/vote-20-regular?width=1.2em&height=1.2em';
 import '@kunkunyu/vote';
 import {VoteBlockExtension} from "@/editor";
 import VoteDetail from "@/views/VoteDetail.vue";
 import UcVotes from "@/uc/UcVotes.vue";
+import "uno.css";
 
 export default definePlugin({
   components: {},
@@ -18,7 +18,7 @@ export default definePlugin({
           {
             path: "",
             name: "Vote",
-            component: Votes,
+            component: () => import("@/views/Votes.vue"),
             meta: {
               title: "投票管理",
               searchable: true,
@@ -33,7 +33,7 @@ export default definePlugin({
           {
             path: ":name/detail",
             name: "VoteDetail",
-            component: VoteDetail,
+            component: () => import("@/views/VoteDetail.vue"),
             meta: {
               title: "投票统计详情",
               searchable: true,

@@ -207,7 +207,7 @@ const onEditingModalClose = () => {
   />
   <VPageHeader title="投票管理">
     <template #icon>
-      <FluentVote20Regular class="mr-2 self-center" />
+      <FluentVote20Regular class=":uno: mr-2 self-center" />
     </template>
     <template #actions>
       <VButton
@@ -216,22 +216,22 @@ const onEditingModalClose = () => {
         @click="editingModal = true"
       >
         <template #icon>
-          <IconAddCircle class="h-full w-full" />
+          <IconAddCircle class=":uno: h-full w-full" />
         </template>
         新建
       </VButton>
     </template>
   </VPageHeader>
-  <div class="m-0 md:m-4">
-    <VCard :body-class="['!p-0']">
+  <div class=":uno: m-0 md:m-4">
+    <VCard :body-class="[':uno: !p-0']">
       <template #header>
-        <div class="block w-full bg-gray-50 px-4 py-3">
+        <div class=":uno: block w-full bg-gray-50 px-4 py-3">
           <div
-            class="relative flex flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center"
+            class=":uno: relative flex flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center"
           >
             <div
               v-permission="['plugin:vote:manage']"
-              class="hidden items-center sm:flex"
+              class=":uno: hidden items-center sm:flex"
             >
               <input
                 v-model="checkAll"
@@ -239,7 +239,7 @@ const onEditingModalClose = () => {
                 @change="handleCheckAllChange"
               />
             </div>
-            <div class="flex w-full flex-1 items-center sm:w-auto">
+            <div class=":uno: flex w-full flex-1 items-center sm:w-auto">
               <SearchInput
                 v-if="!selectedVoteNames.length"
                 v-model="keyword" />
@@ -249,7 +249,7 @@ const onEditingModalClose = () => {
                 </VButton>
               </VSpace>
             </div>
-            <VSpace spacing="lg" class="flex-wrap">
+            <VSpace spacing="lg" class=":uno: flex-wrap">
               <FilterCleanButton
                 v-if="hasFilters"
                 @click="handleClearFilters"
@@ -313,15 +313,15 @@ const onEditingModalClose = () => {
                   },
                 ]"
               />
-              <div class="flex flex-row gap-2">
+              <div class=":uno: flex flex-row gap-2">
                 <div
-                  class="group cursor-pointer rounded p-1 hover:bg-gray-200"
+                  class=":uno: group cursor-pointer rounded p-1 hover:bg-gray-200"
                   @click="refetch()"
                 >
                   <IconRefreshLine
                     v-tooltip="'刷新'"
                     :class="{ 'animate-spin text-gray-900': isFetching }"
-                    class="h-4 w-4 text-gray-600 group-hover:text-gray-900"
+                    class=":uno: h-4 w-4 text-gray-600 group-hover:text-gray-900"
                   />
                 </div>
               </div>
@@ -344,7 +344,7 @@ const onEditingModalClose = () => {
                 v-permission="['plugin:vote:manage']"
                 type="secondary" @click="editingModal = true">
                 <template #icon>
-                  <IconAddCircle class="h-full w-full" />
+                  <IconAddCircle class=":uno: h-full w-full" />
                 </template>
                 新建
               </VButton>

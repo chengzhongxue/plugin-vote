@@ -25,13 +25,16 @@ const voteModal = ref(false);
 
 <template>
   <node-view-wrapper 
-    as="div" 
-    :class="['vote-container',{'vote-container--selected': selected}]">
-    <div class="vote-nav">
-      <div class="vote-nav-start">
+    as="div"
+    :class="[
+      ':uno: rounded overflow-hidden mt-3',
+      selected ? ':uno: ring-2' : ':uno: ring-1 ring-gray-200'
+    ]">
+    <div class=":uno: border-b border-[#e7e7e7] flex p-2.5 items-center">
+      <div class=":uno: flex-1 flex items-center gap-2.5 text-sm">
         <div>投票</div>
       </div>
-      <div class="vote-nav-end">
+      <div class=":uno: flex justify-end">
         <VButton
           v-if="id"
           size="sm"
@@ -41,7 +44,7 @@ const voteModal = ref(false);
         </VButton>
       </div>
     </div>
-    <div class="vote-preview" >
+    <div class=":uno: p-2.5" >
       <VoteRender
         v-if="id"
         :id="id"
@@ -61,48 +64,5 @@ const voteModal = ref(false);
     />
   </node-view-wrapper>
 </template>
-
-<style>
-.vote-container {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow, 0 0 #0000);
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(229 231 235 / var(--tw-ring-opacity));
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: .75em
-}
-
-.vote-container--selected {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow, 0 0 #0000);
-  --tw-ring-color: inherit
-}
-
-.vote-nav {
-  border-bottom: 1px #e7e7e7 solid;
-  display: flex;
-  padding: 5px 10px;
-  align-items: center
-}
-
-.vote-nav-start {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px
-}
-
-.vote-nav-end {
-  justify-content: flex-end
-}
-
-.vote-preview {
-  padding: 5px 10px
-}
-</style>  
 
 

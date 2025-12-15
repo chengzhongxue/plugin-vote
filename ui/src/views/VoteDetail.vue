@@ -167,88 +167,93 @@ const canSeeVotersComputed = computed(() => voteDetail.value?.vote?.spec?.canSee
       </template>
     </VPageHeader>
 
-    <div class="m-0 md:m-4">
-      <VCard :body-class="['!p-4 md:!p-6']">
+    <div class=":uno: m-0 md:m-4">
+      <VCard :body-class="[':uno: !p-2 md:!p-4']">
         <VLoading v-if="isLoadingDetail" description="加载中..." />
         
         <template v-else-if="voteDetail">
           <!-- Vote Info Section -->
-          <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2 text-sm border-b border-gray-200 pb-4">
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-category w-4 h-4 flex-shrink-0"></span>
+          <div class=":uno: mb-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-2 text-sm border-b border-gray-200 pb-4">
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-category w-4 h-4 flex-shrink-0"></span>
               <span>类型:</span>
-              <span class="text-gray-800 font-medium">{{ getVoteTypeText(voteDetail.vote.spec) }}</span>
+              <span class=":uno: text-gray-800 font-medium">{{ getVoteTypeText(voteDetail.vote.spec) }}</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-category w-4 h-4 flex-shrink-0"></span>
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-category w-4 h-4 flex-shrink-0"></span>
               <span>匿名投票:</span>
-              <span class="text-gray-800 font-medium">{{ voteDetail.vote.spec.canAnonymously ? '允许' : '不允许' }}</span>
+              <span class=":uno: text-gray-800 font-medium">{{ voteDetail.vote.spec.canAnonymously ? '允许' : '不允许' }}</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-user-multiple w-4 h-4 flex-shrink-0"></span>
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-user-multiple w-4 h-4 flex-shrink-0"></span>
               <span>参与人数:</span>
-              <span class="text-gray-800 font-medium">{{ voteDetail.voteUser ?? 0 }}人</span>
+              <span class=":uno: text-gray-800 font-medium">{{ voteDetail.voteUser ?? 0 }}人</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-timer w-4 h-4 flex-shrink-0"></span>
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-timer w-4 h-4 flex-shrink-0"></span>
               <span>{{ voteDetail.vote.spec.hasEnded ? '状态:' : '截止:' }}</span>
-              <span :class="['text-gray-800 font-medium', voteDetail.vote.spec.hasEnded ? 'text-red-600' : '']">
+              <span :class="[':uno: text-gray-800 font-medium', voteDetail.vote.spec.hasEnded ? 'text-red-600' : '']">
                 {{ voteDetail.vote.spec.hasEnded ? '已结束' : formatDate(voteDetail.vote.spec.endDate) }}
               </span>
             </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-timer w-4 h-4 flex-shrink-0"></span>
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-timer w-4 h-4 flex-shrink-0"></span>
               <span>可看选择用户:</span>
-              <span class="text-gray-800 font-medium">{{ voteDetail.vote.spec.canSeeVoters  ? '允许' : '不允许' }}</span>
+              <span class=":uno: text-gray-800 font-medium">{{ voteDetail.vote.spec.canSeeVoters  ? '允许' : '不允许' }}</span>
             </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <span class="i-carbon-checkbox-checked w-4 h-4 flex-shrink-0"></span>
+            <div class=":uno: flex items-center gap-2 text-gray-600">
+              <span class=":uno: i-carbon-checkbox-checked w-4 h-4 flex-shrink-0"></span>
               <span>总票数:</span>
-              <span class="text-gray-800 font-medium">{{ voteDetail.voteCount ?? 0 }}票</span>
+              <span class=":uno: text-gray-800 font-medium">{{ voteDetail.voteCount ?? 0 }}票</span>
             </div>
           </div>
           
           <!-- Chart Section -->
           <div v-if="voteDetail.voteCount > 0">
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">投票统计</h3>
+            <h3 class=":uno: text-lg font-semibold text-gray-800 mb-2">投票统计</h3>
             <div ref="chartContainerRef">
               <!-- Chart rendered by script -->
             </div>
           </div>
           
           <!-- Table Section -->
-          <div class="mt-6">
-            <h3 class="text-lg font-semibold text-gray-800 mb-3">详细数据</h3>
-            <div class="overflow-x-auto border border-gray-200 rounded-md">
-              <table class="w-full min-w-[400px] text-sm text-left">
-                <thead class="bg-gray-50 border-b border-gray-200 text-xs text-gray-700 uppercase">
+          <div class=":uno: mt-6">
+            <h3 class=":uno: text-lg font-semibold text-gray-800 mb-3">详细数据</h3>
+            <div class=":uno: overflow-x-auto border border-gray-200 rounded-md">
+              <table class=":uno: w-full min-w-[400px] text-sm text-left">
+                <colgroup>
+                  <col class=":uno: sm:w-1/10">
+                  <col class=":uno: sm:w-1/10">
+                  <col class=":uno: w-full sm:w-1/1.25">
+                </colgroup>
+                <thead class=":uno: bg-gray-50 border-b border-gray-200 text-xs text-gray-700 uppercase">
                   <tr>
-                    <th scope="col" class="px-4 py-2">选项</th>
-                    <th scope="col" class="w-24 text-center px-4 py-2">票数</th>
-                    <th scope="col" class="px-4 py-2">投票人 {{ canSeeVotersComputed ? '(仅登录用户)' : ''}}</th>
+                    <th scope="col" class=":uno: px-4 py-2">选项</th>
+                    <th scope="col" class=":uno: px-4 py-2">票数</th>
+                    <th scope="col" class=":uno: px-4 py-2">投票人 {{ canSeeVotersComputed ? '(仅登录用户)' : ''}}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-if="!voteDetail.vote.spec.options || voteDetail.vote.spec.options.length === 0">
-                    <td :colspan="3" class="text-center text-gray-500 px-4 py-4">
+                    <td :colspan="3" class=":uno: text-center text-gray-500 px-4 py-4">
                       没有投票选项。
                     </td>
                   </tr>
                   <tr v-for="(option, index) in voteDetail.vote.spec.options" 
                       :key="option.id" 
-                      :class="['border-b border-gray-200', index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50']">
-                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ option.title }}</td>
-                    <td class="text-center px-4 py-2 font-medium">{{ getVoteCountForOption(option.id ? option.id : '0') }}</td>
-                    <td class="'px-4 py-2'">
-                      <span v-if="isLoadingUsers" class="text-gray-500">加载中...</span>
-                      <div v-else-if="getUserListForOption(option.id ? option.id : '0').length > 0" class="flex flex-wrap gap-1">
+                      :class="[':uno: border-b border-gray-200', index % 2 === 0 ? ':uno: bg-white' : ':uno: bg-gray-50/50']">
+                    <td class=":uno: px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ option.title }}</td>
+                    <td class=":uno: px-4 py-2 font-medium">{{ getVoteCountForOption(option.id ? option.id : '0') }}</td>
+                    <td class="':uno: px-4 py-2'">
+                      <span v-if="isLoadingUsers" class=":uno: text-gray-500">加载中...</span>
+                      <div v-else-if="getUserListForOption(option.id ? option.id : '0').length > 0" class=":uno: flex flex-wrap gap-1">
                           <span v-for="(displayName, index) in getUserListForOption(option.id ? option.id : '0')"
                                 :key="index"
-                                class="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-full border border-gray-200">
+                                class=":uno: bg-gray-100 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-full border border-gray-200">
                             {{ displayName }}
                           </span>
                       </div>
-                      <span v-else class="text-gray-400">-</span>
+                      <span v-else class=":uno: text-gray-400">-</span>
                     </td>
                   </tr>
                 </tbody>
@@ -261,7 +266,7 @@ const canSeeVotersComputed = computed(() => voteDetail.value?.vote?.spec?.canSee
           v-else-if="!isLoadingDetail && !voteDetail"
           title="无法加载投票数据"
           description="请检查投票名称是否正确或稍后再试。"
-          class="py-10"
+          class=":uno: py-10"
         />
       </VCard>
     </div>

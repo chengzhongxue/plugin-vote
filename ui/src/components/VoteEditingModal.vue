@@ -12,8 +12,8 @@ import { cloneDeep } from "lodash-es";
 import {type Vote, VoteSpecTimeLimitEnum, VoteSpecTypeEnum} from "@/api/generated";
 import SubmitButton from "@/components/button/SubmitButton.vue";
 import {voteApiClient, voteUcApiClient} from "@/api";
-import {toDatetimeLocal, toISOString} from "@/utils/date";
 import {submitForm} from "@formkit/core";
+import { utils } from '@halo-dev/ui-shared'
 
 const props = withDefaults(
   defineProps<{
@@ -73,11 +73,11 @@ const handleSaveVote = async () => {
 
   let startDate = formState.value.spec.startDate
   if (startDate) {
-    formState.value.spec.startDate = startDate ? toISOString(startDate) : undefined;
+    formState.value.spec.startDate = startDate ? utils.date.toISOString(startDate) : undefined;
   }
   let endDate = formState.value.spec.endDate
   if (endDate) {
-    formState.value.spec.endDate = endDate ? toISOString(endDate) : undefined;
+    formState.value.spec.endDate = endDate ? utils.date.toISOString(endDate) : undefined;
   }
   
   try {
@@ -127,11 +127,11 @@ watch(
       formState.value = cloneDeep(vote);
       let startDate = formState.value.spec.startDate
       if (startDate) {
-        formState.value.spec.startDate = startDate ? toDatetimeLocal(startDate) : undefined;
+        formState.value.spec.startDate = startDate ? utils.date.toDatetimeLocal(startDate) : undefined;
       }
       let endDate = formState.value.spec.endDate
       if (endDate) {
-        formState.value.spec.endDate = endDate ? toDatetimeLocal(endDate) : undefined;
+        formState.value.spec.endDate = endDate ? utils.date.toDatetimeLocal(endDate) : undefined;
       }
     }
   },

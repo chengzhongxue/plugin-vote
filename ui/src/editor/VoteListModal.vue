@@ -95,15 +95,15 @@ function handleSubmit() {
     mount-to-body
     @close="emit('close')">
 
-    <div class="block w-full bg-gray-50 px-4 py-3 mb-2">
+    <div class=":uno: block w-full bg-gray-50 px-4 py-3 mb-2">
       <div
-        class="relative flex flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center"
+        class=":uno: relative flex flex-col flex-wrap items-start gap-4 sm:flex-row sm:items-center"
       >
-        <div class="flex w-full flex-1 items-center sm:w-auto">
+        <div class=":uno: flex w-full flex-1 items-center sm:w-auto">
           <SearchInput
             v-model="keyword" />
         </div>
-        <VSpace spacing="lg" class="flex-wrap">
+        <VSpace spacing="lg" class=":uno: flex-wrap">
           <FilterCleanButton
             v-if="hasFilters"
             @click="handleClearFilters"
@@ -167,15 +167,15 @@ function handleSubmit() {
                 },
               ]"
           />
-          <div class="flex flex-row gap-2">
+          <div class=":uno: flex flex-row gap-2">
             <div
-              class="group cursor-pointer rounded p-1 hover:bg-gray-200"
+              class=":uno: group cursor-pointer rounded p-1 hover:bg-gray-200"
               @click="refetch()"
             >
               <IconRefreshLine
                 v-tooltip="'刷新'"
-                :class="{ 'animate-spin text-gray-900': isFetching }"
-                class="h-4 w-4 text-gray-600 group-hover:text-gray-900"
+                :class="{ ':uno: animate-spin text-gray-900': isFetching }"
+                class=":uno: h-4 w-4 text-gray-600 group-hover:text-gray-900"
               />
             </div>
           </div>
@@ -187,16 +187,16 @@ function handleSubmit() {
       <VLoading
         v-if="isLoading"
       />
-      <div v-if="voteList?.total" class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div v-if="voteList?.total" class=":uno: grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div 
           v-for="vote in voteList?.items" :key="vote.metadata.name"
-          :class="['max-h-96 cursor-pointer overflow-auto rounded border border-gray-200 p-4 transition-all hover:border-blue-500',{'!border-blue-500': id === vote.metadata.name}]"
+          :class="[':uno: max-h-96 cursor-pointer overflow-auto rounded border border-gray-200 p-4 transition-all hover:border-blue-500',{':uno: !border-blue-500': id === vote.metadata.name}]"
           @click="id = vote.metadata.name"
         >
           <VoteRender :id="vote.metadata.name" />
-          <div class="flex items-center text-sm pt-3" v-if="path == '/console/posts/editor'" >
-            <span class="flex-1"></span>
-            <span class="text-gray-400">{{'创建人：' + vote.spec.owner}}</span>
+          <div class=":uno: flex items-center text-sm pt-3" v-if="path == '/console/posts/editor'" >
+            <span class=":uno: flex-1"></span>
+            <span class=":uno: text-gray-400">{{'创建人：' + vote.spec.owner}}</span>
           </div>
         </div>
       </div>

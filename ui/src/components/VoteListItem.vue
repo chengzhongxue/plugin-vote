@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { formatDatetime } from "@/utils/date";
 import {
   VEntity,
   VEntityField,
@@ -13,6 +12,7 @@ import {computed} from "vue";
 import {useClipboard} from "@vueuse/core";
 import SolarCopyOutline from '~icons/solar/copy-outline?width=1.2em&height=1.2em';
 import {useRouter} from "vue-router";
+import { utils } from '@halo-dev/ui-shared'
 
 const props = withDefaults(
   defineProps<{
@@ -47,7 +47,7 @@ const copyVote = (name:string) => {
 
 const timeLimitText = computed(() => {
   if (props.vote.spec.timeLimit != VoteSpecTimeLimitEnum.Permanent) {
-    return formatDatetime(props.vote.spec.endDate)+" 前可投票";
+    return utils.date.format(props.vote.spec.endDate)+" 前可投票";
   }
   return "永久";
 })
@@ -96,12 +96,12 @@ function routeToVoteDetail() {
         width="15rem"
       >
         <template #description>
-          <div class="flex flex-col gap-1.5">
-            <VSpace class="flex-wrap !gap-y-1">
-              <p class="inline-flex flex-wrap gap-1 text-xs text-gray-500" v-if="!uc">
-                创建人：<RouterLink class="hover:text-gray-900" :to="{name: 'UserDetail',params: {name: vote.spec.owner},}">{{ vote.spec.owner }}</RouterLink>
+          <div class=":uno: flex flex-col gap-1.5">
+            <VSpace class=":uno: flex-wrap !gap-y-1">
+              <p class=":uno: inline-flex flex-wrap gap-1 text-xs text-gray-500" v-if="!uc">
+                创建人：<RouterLink class=":uno: hover:text-gray-900" :to="{name: 'UserDetail',params: {name: vote.spec.owner},}">{{ vote.spec.owner }}</RouterLink>
               </p>
-              <span v-if="vote.spec.remark" class="text-xs text-gray-500">备注：{{ vote.spec.remark }}</span>
+              <span v-if="vote.spec.remark" class=":uno: text-xs text-gray-500">备注：{{ vote.spec.remark }}</span>
             </VSpace>
           </div>
         </template>
@@ -110,10 +110,10 @@ function routeToVoteDetail() {
     <template #end>
       <VEntityField>
         <template #description>
-          <span class="truncate text-xs tabular-nums text-gray-500">
+          <span class=":uno: truncate text-xs tabular-nums text-gray-500">
             {{vote.metadata.name}}
           </span>
-          <SolarCopyOutline class="ml-0.5 h-3 w-3 cursor-pointer hover:text-sky-500" @click="copyVote(vote.metadata.name)" />
+          <SolarCopyOutline class=":uno: ml-0.5 h-3 w-3 cursor-pointer hover:text-sky-500" @click="copyVote(vote.metadata.name)" />
         </template>
       </VEntityField>
       <VEntityField
@@ -143,8 +143,8 @@ function routeToVoteDetail() {
       </VEntityField>
       <VEntityField>
         <template #description>
-          <span class="truncate text-xs tabular-nums text-gray-500" v-tooltip="'投票开始时间'">
-            {{ formatDatetime(vote.spec.startDate) }}
+          <span class=":uno: truncate text-xs tabular-nums text-gray-500" v-tooltip="'投票开始时间'">
+            {{ utils.date.format(vote.spec.startDate) }}
           </span>
         </template>
       </VEntityField>
